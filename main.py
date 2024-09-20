@@ -17,7 +17,7 @@ def get_rendered_html(url):
     options.add_argument("--headless")  # Run in headless mode for Streamlit
     
     # Start WebDriver and get the URL
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install())
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()))
         
     driver.get(url)
     
