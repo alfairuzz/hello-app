@@ -24,4 +24,6 @@ options.add_argument("--headless")
 driver = get_driver()
 driver.get(text_answer)
 
-st.code(driver.page_source)
+if st.button("Scrape Site"):
+    st.write("Scraping the website...")
+    st.code(driver.page_source)
