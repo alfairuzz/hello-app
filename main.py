@@ -22,6 +22,6 @@ options.add_argument("--disable-gpu")
 options.add_argument("--headless")
 
 driver = get_driver()
-driver.get("text_answer")
+driver.get(text_answer)
 
 st.code(driver.page_source)
