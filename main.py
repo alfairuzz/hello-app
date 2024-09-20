@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 
 text_answer = st.text_input("Write something here:")
 
