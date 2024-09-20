@@ -8,7 +8,6 @@ import time
 
 # Input for user to enter URL
 url = st.text_input("Enter URL to scrape:")
-text_answer = st.text_input("Write something here:")
 
 # Function to render content with Selenium
 def get_rendered_html(url):
