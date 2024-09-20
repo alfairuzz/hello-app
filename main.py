@@ -8,22 +8,39 @@ from webdriver_manager.core.os_manager import ChromeType
 
 text_answer = st.text_input("Write something here:")
 
-@st.cache_resource
-def get_driver():
-    return webdriver.Chrome(
+# Function to render content with Selenium
+def get_rendered_html(url):
+    
+    # Set up Selenium WebDriver options
+    options = webdriver.ChromeOptions()
+    options.add_argument("--incognito") # Run Chrome in incognito mode
+    options.add_argument("--headless")  # Run in headless mode for Streamlit
+    
+    # Start WebDriver and get the URL
+    driver = webdriver.Chrome(
         service=Service(
             ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()
-        ),
-        options=options,
-    )
-
-options = Options()
-options.add_argument("--disable-gpu")
-options.add_argument("--headless")
-
-driver = get_driver()
-driver.get(text_answer)
+    driver.get(url)
+    
+    # Allow the page to load and render JavaScript
+    time.sleep(3)
+    
+    # Get the page source after JavaScript execution
+    html_content = driver.page_source
+    
+    # Close the WebDriver
+    driver.quit()
+    
+    return html_content
 
 if st.button("Scrape Site"):
     st.write("Scraping the website...")
-    st.code(driver.page_source)
+    try:
+        # Scrape and render the website content using Selenium
+        html_content = get_rendered_html(url)
+    except Exception as e:
+        st.error(f"An error occurred: {e}")
+
+    st.code(html_content)
+
+    
